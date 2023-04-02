@@ -63,8 +63,8 @@ function ChatGPTApp() {
                 {addChatMessage({ chatMessages })}
                 <div id='dummy' ref={bottomRef} />
             </div>
-            <div id='current-IO'>
-                <textarea rows='3' cols='40' name='comment' id='userinput' ref={newPrompt} />
+            <div id='input-div'>
+                <textarea rows='2' cols='40' name='comment' id='userinput' ref={newPrompt} />
                 <select ref={ model }>
                     <option value='davinci'>Davinci</option>
                     <option value='babbage'>babbage</option>

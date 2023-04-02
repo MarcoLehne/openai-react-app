@@ -1,11 +1,16 @@
 :root {
-  --background-color: #bcd586;
-  --box-color: #0c3445;
+  --global-background: #BFCDE0;
+  --ink: #FEFCFD;
+  --text-background: #011627;
+  --chat-background: #A7754D;
+  --global-font: Helvetica;
 }
 
 * {
   margin: 0;
   padding: 0;
+  color: var(--ink);
+  font-family: Calibri;
 }
 
 html {
@@ -16,8 +21,11 @@ html {
 }
 
 body {
-  background-color: var(--background-color);
-  border: 5px solid blue;
+  background-color: var(--global-background);
+  /* border: 5px solid blue; */
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #main-div {
@@ -25,55 +33,83 @@ body {
   flex-direction:column;
   justify-content: center;
   align-content: center;
-  border: 5px solid red;
-  left:0;
-  right:0;
+  /* border: 5px solid red; */
   margin:auto;
 }
 
 #headline {
-  border: 5px solid black;
   text-align:center;
+  background-color: var(--text-background);
+  padding:5px;
+  border-radius: 15px;
 }
 
 #chat-history {
-  height: 300px;
-  border: 5px solid green;
+  height: 60vh;
+  /* border: 5px solid green; */
   resize: none;
   overflow-y: scroll;
   display: inline-block;
+  background-color: var(--chat-background);
+  padding:6px;
+  border-radius: 15px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 
 #chat-history > div {
   align-self: end;
-  width: 97%;
+  width: 96%;
   display: flex;
   flex-direction: column;
   float:auto;
+  padding:5px;
+  margin:2px;
+}
+
+textarea,button,select {
+  background-color: var(--text-background);
 }
 
 textarea[name="prompt"] {
   resize: none;
   align-self: end;
-}
-
-div[name="prompt"] {
-  border: 5px solid pink;
+  padding:6px;
+  border-radius: 8px;
 }
 
 textarea[name="response"] {
   resize: none;
   align-self: start;
+  padding:6px;
+  border-radius: 8px;
 }
 
-div[name="response"]{
-  border: 5px solid green;
+#input-div {
+  /* border: 5px solid pink; */
+  display: flex;
+  justify-content: center;
+  background-color: var(--chat-background);
+  padding:10px;
+  border-radius: 14px;
 }
 
-#userinput{
+#input-div > textarea{
   resize:none;
+  margin:5px;
+  padding:6px;
+  border-radius: 8px;
 }
 
-select, input {
-  align-self:start;
+#input-div > select {
+  margin:5px;
+  padding:6px;
+  border-radius: 8px;
 }
+
+#input-div > button {
+  margin:5px;
+  padding:6px;
+  border-radius: 8px;
+}
+
