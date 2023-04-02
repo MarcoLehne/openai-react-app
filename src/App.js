@@ -22,7 +22,7 @@ function ChatGPTApp() {
         const prompt = newPrompt.current.value;
         if (prompt === '') return;
         setChatMessages(prevMessages => {
-            return [...prevMessages, { 'message': prompt , 'promptOrResponse': 'prompt'}]
+            return [...prevMessages, { 'message': prompt , 'promptOrResponseOrError': 'prompt'}]
         })
         
         newPrompt.current.value = null;
@@ -37,13 +37,14 @@ function ChatGPTApp() {
         }).then(response => {
             setChatMessages(prevMessages => {
                 sendButton.current.disabled = false;
-
-                return [...prevMessages.slice(0,19), { 'message': response.data.choices[0].text.trim(), 'promptOrResponse':'response'}]
+                return [...prevMessages.slice(0,19), { 'message': response.data.choices[0].text.trim(), 'promptOrResponseOrError':'response'}]
             })
         }).catch(error => {
+          setChatMessages(prevMessages => {
             sendButton.current.disabled = false;
-            console.log(error);
-            console.log(modelName);
+            return [...prevMessages.slice(0,19), { 'message': error, 'promptOrResponseOrError':"error"}]
+          })
+
         })
 
         // #4 block new user input until the answer is received
@@ -58,13 +59,13 @@ function ChatGPTApp() {
     return (
         <div id='main-div'>
             <h1 id='headline'>ChatGPT Web App</h1>
-            <div id='history'>
+            <div id='chat-history'>
                 {addChatMessage({ chatMessages })}
                 <div id='dummy' ref={bottomRef} />
             </div>
             <div id='current-IO'>
                 <textarea rows='3' cols='40' name='comment' id='userinput' ref={newPrompt} />
-                <select ref={model }>
+                <select ref={ model }>
                     <option value='davinci'>Davinci</option>
                     <option value='babbage'>babbage</option>
                 </select>

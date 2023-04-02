@@ -37,22 +37,19 @@ body {
 }
 
 #chat-history {
-  height: 600px;
+  height: 300px;
   border: 5px solid green;
-  
-  /* resize: none;
-  max-width: inherit;
-  max-height: inherit;
-  align-self:end;
-  overflow-y: scroll; */
+  resize: none;
+  overflow-y: scroll;
+  display: inline-block;
 }
 
 #chat-history > div {
-
-}
-
-#userinput{
-  resize:none;
+  align-self: end;
+  width: 97%;
+  display: flex;
+  flex-direction: column;
+  float:auto;
 }
 
 textarea[name="prompt"] {
@@ -61,12 +58,7 @@ textarea[name="prompt"] {
 }
 
 div[name="prompt"] {
-  align-self: end;
   border: 5px solid pink;
-  width: inherit;
-  width: 95%;
-  display: flex;
-  flex-direction: column;
 }
 
 textarea[name="response"] {
@@ -75,11 +67,11 @@ textarea[name="response"] {
 }
 
 div[name="response"]{
-  align-self: end;
   border: 5px solid green;
-  width: 95%;
-  display: flex;
-  flex-direction:column;
+}
+
+#userinput{
+  resize:none;
 }
 
 select, input {
