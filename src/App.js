@@ -2,6 +2,7 @@ import './App.css';
 import addChatMessage from './component/addChatMessage';
 import React, { useState,useRef, useEffect } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
+
 const configuration = new Configuration({
     organization: "org-G0vPUZ7Xa0N5uMcjYedIVzHX",
     apiKey: process.env.REACT_APP_OPENAI_API_KEY
@@ -24,17 +25,19 @@ function ChatGPTApp() {
         setChatMessages(prevMessages => {
             return [...prevMessages, { 'message': prompt , 'promptOrResponseOrError': 'prompt'}]
         })
-        
         newPrompt.current.value = null;
         
-        // #3 send the user input to the openai api
+        // #2 send the user input to the openai api
         let modelName = model.current.value === "davinci" ? "text-davinci-003" : "babbage";
+        // prevents another user input before API response is there
         sendButton.current.disabled = true;
         openai.createCompletion({
             "model": modelName,
             "prompt": prompt,
             "max_tokens": 2048,
         }).then(response => {
+
+            // #3 add the openai response to chat history
             setChatMessages(prevMessages => {
                 sendButton.current.disabled = false;
                 if (prevMessages.length === 20) {
@@ -42,7 +45,10 @@ function ChatGPTApp() {
                 }
                 return [...prevMessages, { 'message': response.data.choices[0].text.trim(), 'promptOrResponseOrError':'response'}]
             })
+
         }).catch(error => {
+
+          // #3 add an error to chat history
           setChatMessages(prevMessages => {
             sendButton.current.disabled = false;
             if (prevMessages.length === 20) {
@@ -50,11 +56,7 @@ function ChatGPTApp() {
             }
             return [...prevMessages, { 'message': error, 'promptOrResponseOrError':"error"}]
           })
-
         })
-
-        // #4 block new user input until the answer is received
-        // #4 post the answer from chat gpt to the chat window
     }
 
     // this handles scrolling to an empty bottom div
