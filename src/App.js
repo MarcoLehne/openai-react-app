@@ -28,7 +28,7 @@ function ChatGPTApp() {
         newPrompt.current.value = null;
         
         // #3 send the user input to the openai api
-        let modelName = model.current.value === "davinci" ? "text-davinci-003" : "text-davinci-003";
+        let modelName = model.current.value === "davinci" ? "text-davinci-003" : "babbage";
         sendButton.current.disabled = true;
         openai.createCompletion({
             "model": modelName,
@@ -37,12 +37,18 @@ function ChatGPTApp() {
         }).then(response => {
             setChatMessages(prevMessages => {
                 sendButton.current.disabled = false;
-                return [...prevMessages.slice(0,19), { 'message': response.data.choices[0].text.trim(), 'promptOrResponseOrError':'response'}]
+                if (prevMessages.length === 20) {
+                  prevMessages = prevMessages.slice(1);
+                }
+                return [...prevMessages, { 'message': response.data.choices[0].text.trim(), 'promptOrResponseOrError':'response'}]
             })
         }).catch(error => {
           setChatMessages(prevMessages => {
             sendButton.current.disabled = false;
-            return [...prevMessages.slice(0,19), { 'message': error, 'promptOrResponseOrError':"error"}]
+            if (prevMessages.length === 20) {
+              prevMessages = prevMessages.slice(1);
+            }
+            return [...prevMessages, { 'message': error, 'promptOrResponseOrError':"error"}]
           })
 
         })

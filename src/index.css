@@ -2,8 +2,9 @@
   --global-background: #BFCDE0;
   --ink: #FEFCFD;
   --text-background: #011627;
-  --chat-background: #A7754D;
+  --chat-background: #7D6F86;
   --global-font: Helvetica;
+  --error-color: #EF7B45;
 }
 
 * {
@@ -83,6 +84,11 @@ textarea[name="response"] {
   align-self: start;
   padding:6px;
   border-radius: 8px;
+}
+
+h2 {
+  font-size: 16px;
+  color: var(--error-color);
 }
 
 #input-div {
