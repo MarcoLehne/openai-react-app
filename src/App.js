@@ -61,11 +61,12 @@ function ChatGPTApp() {
 
     // this handles scrolling to an empty bottom div
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (bottomRef.current instanceof HTMLElement && bottomRef.current !== null) {
+        }
     }, [chatMessages]);
 
     return (
-        <div id='main-div'>
+        <div id='main-div' data-testid='main-div'>
             <h1 id='headline'>ChatGPT Web App</h1>
             <div id='chat-history'>
                 {AddChatMessage({ chatMessages })}
