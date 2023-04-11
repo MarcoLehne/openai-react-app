@@ -1,5 +1,5 @@
 import './App.css';
-import addChatMessage from './component/addChatMessage';
+import AddChatMessage from './component/AddChatMessage';
 import React, { useState,useRef, useEffect } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -68,7 +68,7 @@ function ChatGPTApp() {
         <div id='main-div'>
             <h1 id='headline'>ChatGPT Web App</h1>
             <div id='chat-history'>
-                {addChatMessage({ chatMessages })}
+                {AddChatMessage({ chatMessages })}
                 <div id='dummy' ref={bottomRef} />
             </div>
             <div id='input-div'>

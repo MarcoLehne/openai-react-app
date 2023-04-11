@@ -1,5 +1,5 @@
 
-function addChatMessage({ chatMessages }) {
+function AddChatMessage({ chatMessages }) {
 
     return (
         chatMessages.map((message, i) => {
@@ -19,13 +19,11 @@ function addChatMessage({ chatMessages }) {
                 rows = rows.toString();
 
                 return <div key={i} name={message.promptOrResponseOrError}>
-                            <textarea name={message.promptOrResponseOrError} rows={rows} cols="30" readonly='true'>
-                            {message.message}
-                            </textarea>
+                            <textarea name={message.promptOrResponseOrError} rows={rows} cols="30" readOnly={true} value={message.message}/>
                         </div>
             }
         })
     );
 }
 
-export default addChatMessage;
+export default AddChatMessage;
